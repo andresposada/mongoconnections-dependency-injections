@@ -2,10 +2,14 @@ import json
 from src.user.use_cases import UserUseCase
 from src.user.schemas import UserSchema
 from abc import ABC, abstractmethod
-from src.containers import Services
+
+user_schema = UserSchema()
 
 
 class UserControllerBase(ABC):
+
+    def __init__(self, user_use_case: UserUseCase):
+        self.user_use_case = user_use_case
 
     @abstractmethod
     def execute(self, **kwargs):
@@ -15,15 +19,13 @@ class UserControllerBase(ABC):
 class UserControllerPost(UserControllerBase):
 
     def execute(self, **kwargs):
-        user_service = Services.user_service
-        user_service.create_user()
-
-
-class UserController:
-
-    @staticmethod
-    def post(event, context):
-        user_json = json.loads(event['json'])
-        user_schema = UserSchema()
+        user_json = json.loads(kwargs.get('data', {}))
         user_data = user_schema.load(user_json)
-        UserUseCase.create_user(user_data)
+        return self.user_use_case.create_user(user_json=user_data)
+
+
+class UserControllerDelete(UserControllerBase):
+
+    def execute(self, **kwargs):
+        user_id = kwargs.get('user_id', None)
+        self.user_use_case.delete_user(user_id)
