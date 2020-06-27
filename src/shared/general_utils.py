@@ -1,6 +1,7 @@
 import datetime
 import mongoengine as me
 from marshmallow import Schema, fields
+from abc import ABC, abstractmethod
 
 
 class GeneralEntity(me.Document):
@@ -22,4 +23,23 @@ class GenericSchema(Schema):
     """
     Generic scheme to define common attributes
     """
-    id = fields.String(attribute='_id', data_key='id')
+    id = fields.String(db_field='_id')
+
+
+class GeneralRepository(ABC):
+
+    @abstractmethod
+    def find_by_id(self, entity_id) -> GeneralEntity:
+        pass
+
+    @abstractmethod
+    def save(self, entity: GeneralEntity) -> GeneralEntity:
+        pass
+
+    @abstractmethod
+    def update(self, entity: GeneralEntity) -> GeneralEntity:
+        pass
+
+    @abstractmethod
+    def delete_by_id(self, entity_id):
+        pass
