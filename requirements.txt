@@ -1,3 +1,5 @@
+pyYALM
+bcrypt
 dependency-injector==3.18.1
 marshmallow==3.6.1
 mongoengine==0.20.0
