@@ -1,3 +1,10 @@
 aws:
   access_key_id: "TESTKEY1234"
   secret_access_key: "TESECRET$%^&"
+db:
+  host: 'mongodb://localhost'
+  username: 'root'
+  password: 'root'
+  port: 27018
+  authentication_source: 'admin'
+  database: 'loto-dev'

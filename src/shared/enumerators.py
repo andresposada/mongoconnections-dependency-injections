@@ -7,4 +7,4 @@ class UserType(Enum):
 
 
 class Constant(Enum):
-    BASE_CONFIG_PATH = '../src/resources/application-{}.yml'
+    BASE_CONFIG_PATH = 'resources/application-{}.yml'

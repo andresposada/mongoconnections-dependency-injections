@@ -10,3 +10,13 @@ def get_hashed_password(plain_text_password):
 def check_password(plain_text_password, hashed_password):
     # Check hashed password. Using bcrypt, the salt is saved into the hash itself
     return bcrypt.checkpw(plain_text_password, hashed_password)
+
+
+def get_active_profile(context):
+    """
+    Gets the active profile from context info
+    :param context:
+    :return:
+    """
+    lambda_name = vars(context)['invoked_function_arn']
+    return lambda_name.split(':')[-1]

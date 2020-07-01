@@ -21,7 +21,6 @@ class TestUser(unittest.TestCase):
 
     def test_profile_configuration(self):
         config_provider = ConfigSingleton.get_instance().get_config_provider()
-        assert config_provider() == {'aws': {'access_key_id': 'TESTKEY1234', 'secret_access_key': 'TESECRET$%^&'}}
         assert config_provider.aws() == {'access_key_id': 'TESTKEY1234', 'secret_access_key': 'TESECRET$%^&'}
         assert config_provider.aws.access_key_id() == 'TESTKEY1234'
         assert config_provider.aws.secret_access_key() == 'TESECRET$%^&'

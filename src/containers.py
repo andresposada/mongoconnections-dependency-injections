@@ -3,14 +3,15 @@ import dependency_injector.providers as providers
 import src.user.user_controller
 import src.user.mongo_repository
 import src.user.use_cases
+import mongoengine
 
 
 class Core(containers.DeclarativeContainer):
-    pass
+    config = providers.Configuration()
 
 
 class Gateways(containers.DeclarativeContainer):
-    pass
+    mongo_connection = providers.Singleton(mongoengine.connect, Core.config.db)
 
 
 class Repositories(containers.DeclarativeContainer):

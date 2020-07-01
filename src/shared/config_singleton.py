@@ -4,6 +4,7 @@
 class ConfigSingleton:
     __instance = None
     __config_provider = None
+    __active_profile = None
 
     @classmethod
     def get_instance(cls):
@@ -28,3 +29,17 @@ class ConfigSingleton:
         @param config_provider:
         """
         self.__config_provider = config_provider
+
+    def get_active_profile(self):
+        """
+        Get the current active profile
+        :return:
+        """
+        return self.__active_profile
+
+    def set_active_profile(self, profile):
+        """
+        Sets the current active profile value
+        @param profile:
+        """
+        self.__active_profile = profile
